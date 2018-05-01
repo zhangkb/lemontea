@@ -8,7 +8,7 @@ var jwt = require('jsonwebtoken');
 const fileUpload = require('express-fileupload');
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/science')
+mongoose.connect('mongodb://120.79.214.223:27017/science')
 
 
 var routers = require('./routes/index')
