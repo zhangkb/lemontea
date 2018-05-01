@@ -153,7 +153,7 @@ export default {
     },
     login: function(){
         var self = this;
-        axios.post('http://localhost:3001/login', qs.stringify({
+        axios.post('http://120.79.214.223:3001/login', qs.stringify({
             email: this.user.email,
             password: this.user.password
         }))
@@ -185,7 +185,7 @@ export default {
     },
     getUser: function(){
         console.log(localStorage.getItem('token'));
-        axios.get('http://localhost:3001/getuser',{
+        axios.get('http://120.79.214.223:3001/getuser',{
             params: {
                 token: localStorage.getItem('token'),
                 id: localStorage.getItem('id')

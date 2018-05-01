@@ -35,11 +35,11 @@
               <li>
                   <span>用户头像</span>
                   <div class="acount-user-logo">
-                      <img v-model="cacheLogo" :src="'http://localhost:3001/' + cacheLogo" alt="">
+                      <img v-model="cacheLogo" :src="'http://120.79.214.223:3001/' + cacheLogo" alt="">
                   </div>
                   <div v-if="modShow" class="acount-logo-operate">
                       <el-upload class="upload-demo"
-                       action="http://localhost:3001/upload"
+                       action="http://120.79.214.223:3001/upload"
                        name="foo"
                        :multiple="false"
                        :show-file-list="false"
@@ -130,7 +130,7 @@ export default {
             let config = {
                 'Content-Type': 'multipart/form-data'
             };
-            axios.post('http://localhost:3001/upload',formData, config).then((response)=>{
+            axios.post('http://120.79.214.223:3001/upload',formData, config).then((response)=>{
                 console.log(response);
                 if (response.status === 200 && response.data.status == 1) {
                     self.cacheLogo = response.data.data.name;
@@ -141,7 +141,7 @@ export default {
         },
         getUser(){
 
-            axios.get("http://localhost:3001/getUser", {
+            axios.get("http://120.79.214.223:3001/getUser", {
                 params: {
                     id: localStorage.getItem('id'),
                     token: localStorage.getItem('token')
@@ -170,7 +170,7 @@ export default {
             self.user.address = self.selectedCity.join(',');
             self.user.avatar = self.cacheLogo;
             self.user.qualification = this.cacheQua;
-            axios.post('http://localhost:3001/userupdate',qs.stringify({
+            axios.post('http://120.79.214.223:3001/userupdate',qs.stringify({
                 id: localStorage.getItem('id'),
                 token: localStorage.getItem('token'),
                 user: JSON.stringify(self.user)
