@@ -59,27 +59,27 @@
       :visible.sync="register"
       width="40%"
       :before-close="handleClose">
-      <el-input v-model="user.email" placeholder="账号">
+      <el-input v-model="user.name" placeholder="账号">
           <template slot="prepend">账号</template>
       </el-input>
       <el-input type="password" v-model="user.password" placeholder="密码">
           <template slot="prepend">密码</template>
       </el-input>
-      <el-input type="password" v-model="user.password" placeholder="确认密码">
+      <el-input type="password" v-model="user.password2" placeholder="确认密码">
           <template slot="prepend">确认密码</template>
       </el-input>
-      <el-input type="password" v-model="user.password" placeholder="Email">
+      <el-input v-model="user.email" placeholder="Email">
           <template slot="prepend">Email</template>
       </el-input>
-      <el-input type="password" v-model="user.password" placeholder="联系方式">
+      <el-input v-model="user.phone" placeholder="联系方式">
           <template slot="prepend">联系方式</template>
       </el-input>
-      <el-input type="password" v-model="user.password" placeholder="密码">
-          <template slot="prepend">密码</template>
+      <el-input v-model="user.sex" placeholder="性别">
+          <template slot="prepend">性别</template>
       </el-input>
       <span slot="footer" class="dialog-footer">
         <el-button @click="register = false">取 消</el-button>
-        <el-button type="primary" @click="login">确 定</el-button>
+        <el-button type="primary" @click="registerFun">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -100,6 +100,7 @@ export default {
             name: '',
             password: '',
             email: '',
+            sex: '',
             id: '',
           },
           navgatText: [
@@ -165,6 +166,26 @@ export default {
                 self.user.name = response.data.data.name;
                 self.dialogVisible = false;
                 self.islogin = true;
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    },
+    registerFun: function(){
+        console.log(123);
+        var self = this;
+        axios.post('http://120.79.214.223:3001/register', qs.stringify({
+            email: this.user.email,
+            password: this.user.password,
+            name: this.user.name,
+            sex: this.user.sex,
+            roles: 'member'
+        }))
+        .then(function (response) {
+            console.log(response);
+            if (response.status === 200 && response.data.msg.status == 1) {
+                console.log(response)
             }
         })
         .catch(function (error) {

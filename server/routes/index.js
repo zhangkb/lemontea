@@ -240,11 +240,9 @@ module.exports = function(app) {
 
         res.header("Access-Control-Allow-Origin", "*");
         const admin = new User({
-            person: req.body.person,
+            name: req.body.person,
             password: req.body.password,
-            address: req.body.address,
             phone: req.body.phone,
-            company: req.body.company,
             email: req.body.email,
             roles: req.body.roles
         });
