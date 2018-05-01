@@ -290,4 +290,7 @@ export default {
             padding-left: 35px;
         }
     }
+    .city-select {
+        width: 282px;
+    }
 </style>

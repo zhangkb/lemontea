@@ -186,6 +186,7 @@ export default {
             console.log(response);
             if (response.status === 200 && response.data.msg.status == 1) {
                 console.log(response)
+                this.register = false;
             }
         })
         .catch(function (error) {
