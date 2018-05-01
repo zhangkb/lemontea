@@ -14,7 +14,6 @@ module.exports = function(app) {
         const admin = new User({
             name: req.body.name,
             password: req.body.password,
-            address: req.body.address,
             phone: req.body.phone,
             email: req.body.email,
             roles: req.body.roles

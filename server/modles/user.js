@@ -16,6 +16,7 @@ const _User = new Schema({
     cardType: String,
     cardNum: Number,
     roles: String,
+    avatar: String,
     favorite: [
         {
             title_id: Schema.Types.ObjectId,
