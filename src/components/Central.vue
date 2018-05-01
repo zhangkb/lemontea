@@ -14,24 +14,7 @@
                   </router-link>
 
               </li>
-              <li class="media-box">
-                  <div class="media-img">
-                      <img src="../assets/images/media-01.jpg" alt="">
-                  </div>
-                  <div class="media-content">
-                      <h2>孕妇缺铁危害大 饮食补铁可防治孕妇缺铁性贫血</h2>
-                      <span>科普中国-乐享健康 2018-04-20</span>
-                  </div>
-              </li>
-              <li class="media-box">
-                  <div class="media-img">
-                      <img src="../assets/images/media-01.jpg" alt="">
-                  </div>
-                  <div class="media-content">
-                      <h2>孕妇缺铁危害大 饮食补铁可防治孕妇缺铁性贫血</h2>
-                      <span>科普中国-乐享健康 2018-04-20</span>
-                  </div>
-              </li>
+
           </ul>
           <el-card class="box-card">
               <div slot="header" class="clearfix">
@@ -41,7 +24,7 @@
                 <div class="img-box">
                     <img :src="o.url" alt="">
                 </div>
-                <span class="textdia">{{o.title}}</span>
+                <span class="textdia" >{{o.title}}</span>
               </div>
           </el-card>
       </div>
@@ -62,40 +45,40 @@ export default {
         return {
             media: [
                 {
-                    url: require('../assets/images/media-01.jpg'),
-                    title: "孕妇缺铁危害大 饮食补铁可防治孕妇缺铁性贫血",
+                    url: 'http://www.kepuchina.cn/tech/cxgc/201804/W020180428515824477671.jpg',
+                    title: "甘肃武威医用重离子加速器系统全面完成检测报告",
                     time: "2018-04-20",
-                    auth: "科普中国-乐享健康"
+                    auth: "新华网"
                 },
                 {
-                    url: require('../assets/images/media-02.jpg'),
-                    title: "补充维生素不是想补就能补 补充过量会中毒",
-                    time: "2018-04-20",
-                    auth: "科普中国-乐享健康"
+                    url: 'http://www.kepuchina.cn/tech/cxgc/201804/W020180428509139869970.jpg',
+                    title: "中国女性在发明中贡献远超全球平均水平",
+                    time: "2018-04-28",
+                    auth: "新华网"
                 },
                 {
-                    url: require('../assets/images/media-03.jpg'),
-                    title: "老人黄昏突然变得糊涂？可能患上了“日落综合征”",
-                    time: "2018-04-20",
-                    auth: "科普中国-乐享健康"
+                    url:'http://www.kepuchina.cn/kpcs/lcb/lcb3/201707/W020170720566959928100.jpg',
+                    title: "自动驾驶“跳级”没那么简单",
+                    time: "2017-07-20",
+                    auth: "科学网"
                 },
                 {
-                    url: require('../assets/images/media-04.jpg'),
-                    title: "头皮瘙痒怎么办？注意清洁、正确护理很重要",
+                    url:'http://www.kepuchina.cn/zt/2018/innovation/05/201804/W020180402545094279325.png',
+                    title: "创业路上遇难事 政策帮你破难题",
                     time: "2018-04-20",
-                    auth: "科普中国-乐享健康"
+                    auth: "中国政府网"
                 },
                 {
-                    url: require('../assets/images/media-05.jpg'),
-                    title: "警惕“病从口入” 预防食源性疾病有方法",
+                    url: 'http://www.kepuchina.cn/zt/2018/innovation/05/201804/W020180402548846883852.jpg',
+                    title: "创客们！来看专属创业优惠政策",
                     time: "2018-04-20",
-                    auth: "科普中国-乐享健康"
+                    auth: "中国政府网"
                 },
                 {
-                    url: require('../assets/images/media-01.jpg'),
-                    title: "孕妇缺铁危害大 饮食补铁可防治孕妇缺铁性贫血",
+                    url: 'http://www.kepuchina.cn/zt/2018/innovation/05/201804/W020180402566793185321.jpg',
+                    title: "“双创”要升级 来看最新版本",
                     time: "2018-04-20",
-                    auth: "科普中国-乐享健康"
+                    auth: "中国政府网"
                 },
             ]
         }
@@ -167,7 +150,7 @@ export default {
     }
 
 }
- .textdia {
+.textdia {
     width: 130px;
     overflow: hidden;
     height: 20px;

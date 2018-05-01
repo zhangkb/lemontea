@@ -5,7 +5,7 @@
               <span v-show="islogin == false" @click="dialogVisible = true">登录</span>
               <router-link style="color:#fff;" :to="{ path: '/acount' }"><span v-show="islogin == true">{{ user.name }}</span></router-link>
               <span v-show="islogin == true" @click="logout">退出</span>
-              <span v-show="islogin == false" >注册</span>
+              <span @click="register = true" v-show="islogin == false" >注册</span>
           </div>
       </div>
     <div class="header">
@@ -53,6 +53,35 @@
         <el-button type="primary" @click="login">确 定</el-button>
       </span>
     </el-dialog>
+
+    <el-dialog
+      title="注册"
+      :visible.sync="register"
+      width="40%"
+      :before-close="handleClose">
+      <el-input v-model="user.email" placeholder="账号">
+          <template slot="prepend">账号</template>
+      </el-input>
+      <el-input type="password" v-model="user.password" placeholder="密码">
+          <template slot="prepend">密码</template>
+      </el-input>
+      <el-input type="password" v-model="user.password" placeholder="确认密码">
+          <template slot="prepend">确认密码</template>
+      </el-input>
+      <el-input type="password" v-model="user.password" placeholder="Email">
+          <template slot="prepend">Email</template>
+      </el-input>
+      <el-input type="password" v-model="user.password" placeholder="联系方式">
+          <template slot="prepend">联系方式</template>
+      </el-input>
+      <el-input type="password" v-model="user.password" placeholder="密码">
+          <template slot="prepend">密码</template>
+      </el-input>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="register = false">取 消</el-button>
+        <el-button type="primary" @click="login">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -65,6 +94,7 @@ export default {
       return {
           msg: 'header',
           dialogVisible: false,
+          register: false,
           islogin: false,
           user: {
             name: '',
@@ -81,22 +111,22 @@ export default {
               path: '/base'
             },{
               name: '政策法规',
-              path: '/base'
+              path: '/policy'
             },{
               name: '科学生活',
-              path: '/base'
+              path: '/science'
             },{
               name: '农村科苑',
-              path: '/base'
+              path: '/countryside'
             },{
               name: '科技万象',
-              path: '/base'
+              path: '/technology'
             },{
               name: '中原风采',
-              path: '/base'
+              path: '/central'
             },{
               name: '资源查询',
-              path: '/base'
+              path: '/serach'
             }
           ],
           activeName: '首页'
