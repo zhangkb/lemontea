@@ -271,133 +271,133 @@ module.exports = function(app) {
      * @param q
      * @returns {Promise}
      */
-    app.post('/search',function(req, res){
-            let q = req.query.q;
-            let query = q['query'] || {};
-            let sort = q['sort'] || {};
-            let page = q['page'] || {};
-            let pageIndex = page['index'];
-            let pageSize = page['size'];
-            let skip = (pageIndex - 1) * pageSize;
-            //-----------------notice start--------------
-            // 处理模糊匹配字段
-            // if (query['$or']) {
-            //     query['$or'] = [
-            //         {title:{$regex: query.title, $options: "$i"}},
-            //         {content:{$regex: query.content, $options: "$i"}}
-            //     ];
-            // }
-            if (query.title || query.content) {
-                let keyword = '^';
-                let qtitle = query.title
-                for (var i = 0; i < qtitle.length; i++) {
-                    keyword += '(?=.*' + qtitle[i] + ')';
-                }
-                query['$or'] = [
-                    {title: {$regex: keyword, $options: "$i"}},
-                    {content: {$regex: keyword, $options: "$i"}}
-                ];
-                delete query.title;
-                delete query.content
-                // query.content = {$regex: query.content, $options: "$i"};
-            }
-
-            // 处理DBRef字段
-            if (query.site) {
-                query.site = new DBRef('site', helper.toObjectID(query.site));
-            }
-
-            // 处理ObjectId字段
-            if (query._id) {
-                query._id = helper.toObjectID(query._id)
-            }
-
-            if (query.ids) {
-                // console.log('输出ids');
-                // console.log(query.ids)
-                let queryIds = query.ids;
-                let ids = [];
-                for (var i = 0; i < queryIds.length; i++) {
-                    ids[i] = helper.toObjectID(queryIds[i])
-                }
-                query._id = {$in: ids};
-                delete query.ids;
-            }
-            //-----------------notice end--------------
-            // console.log('输出query = 98')
-            // console.log(query)
-            // 查询数量
-            let query_count = new Promise((resolve, reject) => {
-                console.log(query)
-                db.info.count(query, async (err, result) => {
-                    if (!err) {
-                        resolve(result);
-                    } else {
-                        reject(err);
-                    }
-                });
-            });
-
-            // 查询数据
-            let query_data = new Promise((resolve, reject) => {
-                // console.log(query)
-                db.info.find(query).sort(sort).skip(skip).limit(pageSize).toArray(async (err, result) => {
-                    if (!err) {
-                        // console.log(result)
-                        resolve(result);
-                    } else {
-                        reject(err);
-                    }
-                });
-            });
-
-            // 构造分页信息
-            let buildPageInfo = (pageIndex, pageSize, totalCount) => {
-
-                // let totalPage = (totalCount % pageSize > 0) ? parseInt(totalCount / pageSize) + 1 : Math.floor(totalCount / pageSize);
-
-                // 向上取整
-                let totalPage = Math.ceil(totalCount / pageSize);
-                let nextPage = (pageIndex == totalPage) ? pageIndex : pageIndex + 1;
-                let prePage = (pageIndex > 1) ? pageIndex - 1 : pageIndex;
-                let lastResultIndex = pageIndex * pageSize - 1;
-                let firstResultIndex = (pageIndex - 1) * pageSize;
-
-                let pageInfo = {
-                    firstResultIndex: firstResultIndex,
-                    lastResultIndex: lastResultIndex,
-                    pageIndex: pageIndex,
-                    pageSize: pageSize,
-                    prePage: prePage,
-                    nextPage: nextPage,
-                    totalCount: totalCount,
-                    totalPage: totalPage
-                };
-
-                return pageInfo;
-            };
-
-            // 构造分页结果
-            let buildPage = new Promise((resolve, reject) => {
-                Promise.all([query_count, query_data]).then((datas) => {
-
-                    let totalCount = datas[0];
-                    let data = datas[1];
-
-                    // console.log(data[0]);
-                    // console.log(data[1]);
-
-                    let result = {
-                        pageDatas: data,
-                        pageInfo: buildPageInfo(pageIndex, pageSize, totalCount)
-                    };
-
-                    resolve(result);
-                });
-
-            });
-
-    });
+    // app.post('/search',function(req, res){
+    //         let q = req.query.q;
+    //         let query = q['query'] || {};
+    //         let sort = q['sort'] || {};
+    //         let page = q['page'] || {};
+    //         let pageIndex = page['index'];
+    //         let pageSize = page['size'];
+    //         let skip = (pageIndex - 1) * pageSize;
+    //         //-----------------notice start--------------
+    //         // 处理模糊匹配字段
+    //         // if (query['$or']) {
+    //         //     query['$or'] = [
+    //         //         {title:{$regex: query.title, $options: "$i"}},
+    //         //         {content:{$regex: query.content, $options: "$i"}}
+    //         //     ];
+    //         // }
+    //         if (query.title || query.content) {
+    //             let keyword = '^';
+    //             let qtitle = query.title
+    //             for (var i = 0; i < qtitle.length; i++) {
+    //                 keyword += '(?=.*' + qtitle[i] + ')';
+    //             }
+    //             query['$or'] = [
+    //                 {title: {$regex: keyword, $options: "$i"}},
+    //                 {content: {$regex: keyword, $options: "$i"}}
+    //             ];
+    //             delete query.title;
+    //             delete query.content
+    //             // query.content = {$regex: query.content, $options: "$i"};
+    //         }
+    //
+    //         // 处理DBRef字段
+    //         if (query.site) {
+    //             query.site = new DBRef('site', helper.toObjectID(query.site));
+    //         }
+    //
+    //         // 处理ObjectId字段
+    //         if (query._id) {
+    //             query._id = helper.toObjectID(query._id)
+    //         }
+    //
+    //         if (query.ids) {
+    //             // console.log('输出ids');
+    //             // console.log(query.ids)
+    //             let queryIds = query.ids;
+    //             let ids = [];
+    //             for (var i = 0; i < queryIds.length; i++) {
+    //                 ids[i] = helper.toObjectID(queryIds[i])
+    //             }
+    //             query._id = {$in: ids};
+    //             delete query.ids;
+    //         }
+    //         //-----------------notice end--------------
+    //         // console.log('输出query = 98')
+    //         // console.log(query)
+    //         // 查询数量
+    //         let query_count = new Promise((resolve, reject) => {
+    //             console.log(query)
+    //             db.info.count(query, async (err, result) => {
+    //                 if (!err) {
+    //                     resolve(result);
+    //                 } else {
+    //                     reject(err);
+    //                 }
+    //             });
+    //         });
+    //
+    //         // 查询数据
+    //         let query_data = new Promise((resolve, reject) => {
+    //             // console.log(query)
+    //             db.info.find(query).sort(sort).skip(skip).limit(pageSize).toArray(async (err, result) => {
+    //                 if (!err) {
+    //                     // console.log(result)
+    //                     resolve(result);
+    //                 } else {
+    //                     reject(err);
+    //                 }
+    //             });
+    //         });
+    //
+    //         // 构造分页信息
+    //         let buildPageInfo = (pageIndex, pageSize, totalCount) => {
+    //
+    //             // let totalPage = (totalCount % pageSize > 0) ? parseInt(totalCount / pageSize) + 1 : Math.floor(totalCount / pageSize);
+    //
+    //             // 向上取整
+    //             let totalPage = Math.ceil(totalCount / pageSize);
+    //             let nextPage = (pageIndex == totalPage) ? pageIndex : pageIndex + 1;
+    //             let prePage = (pageIndex > 1) ? pageIndex - 1 : pageIndex;
+    //             let lastResultIndex = pageIndex * pageSize - 1;
+    //             let firstResultIndex = (pageIndex - 1) * pageSize;
+    //
+    //             let pageInfo = {
+    //                 firstResultIndex: firstResultIndex,
+    //                 lastResultIndex: lastResultIndex,
+    //                 pageIndex: pageIndex,
+    //                 pageSize: pageSize,
+    //                 prePage: prePage,
+    //                 nextPage: nextPage,
+    //                 totalCount: totalCount,
+    //                 totalPage: totalPage
+    //             };
+    //
+    //             return pageInfo;
+    //         };
+    //
+    //         // 构造分页结果
+    //         let buildPage = new Promise((resolve, reject) => {
+    //             Promise.all([query_count, query_data]).then((datas) => {
+    //
+    //                 let totalCount = datas[0];
+    //                 let data = datas[1];
+    //
+    //                 // console.log(data[0]);
+    //                 // console.log(data[1]);
+    //
+    //                 let result = {
+    //                     pageDatas: data,
+    //                     pageInfo: buildPageInfo(pageIndex, pageSize, totalCount)
+    //                 };
+    //
+    //                 resolve(result);
+    //             });
+    //
+    //         });
+    //
+    // });
 
 
 }
