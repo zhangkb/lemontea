@@ -106,7 +106,7 @@ export default {
           navgatText: [
             {
               name: '首页',
-              path: '/home'
+              path: '/'
             },{
               name: '科普基地',
               path: '/base'
@@ -231,6 +231,7 @@ html,
 body {
     background-color: #ffffff;
 }
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -285,12 +286,14 @@ body {
 .footer {
     width: 1200px;
     margin: 50px auto;
+    margin-bottom: 0;
     padding: 30px;
     background-color: rgba(171, 159, 159, 0.1);
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
     text-align: left;
+    color: #fff;
     h2 {
         font-size: 20px;
         // color: #fff;
@@ -299,11 +302,15 @@ body {
         display: flex;
         flex-direction: row;
         li {
+            color: #fff;
             height: 25px;
             line-height: 25px;
             margin: 20px;
             padding: 0 25px;
             border-right: 1px solid #ddd;
+            a {
+                color: #fff;
+            }
         }
     }
 }

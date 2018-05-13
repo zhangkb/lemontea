@@ -11,6 +11,12 @@ import Central from '@/components/Central'
 import Countryside from '@/components/countryside'
 import Science from '@/components/science'
 import Technology from '@/components/technology'
+import Backstage from '@/components/backstage'
+import Backcommon from '@/components/backcommon'
+import Admin from '@/components/admin'
+import User from '@/components/backuser'
+import Count from '@/components/count'
+import Login from '@/components/login'
 
 Vue.use(Router)
 
@@ -22,7 +28,7 @@ export default new Router({
 			component: Common,
 			children: [
 				{
-					path: 'home',
+					path: '/',
 					name: 'HelloWorld',
 					component: HelloWorld
 				},
@@ -68,11 +74,40 @@ export default new Router({
 				}
 			]
         },
-
+		{
+			path: '/login',
+			name: 'login',
+			component: Login
+		},
 		{
 			path: '/register',
 			name: 'register',
 			component: Register
+		},
+		{
+			path: '/back',
+			name: 'backcommon',
+			component: Backcommon,
+			children: [
+				{
+					path: '/back',
+					name: 'backstage',
+					component: Backstage
+				},{
+					path: '/admin',
+					name: 'admin',
+					component: Admin
+				},{
+					path: '/user',
+					name: 'user',
+					component: User
+				},{
+					path: '/count',
+					name: 'count',
+					component: Count
+				}
+			]
+
 		}
 
   ]
